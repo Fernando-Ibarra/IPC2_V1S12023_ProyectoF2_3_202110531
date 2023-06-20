@@ -31,9 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 LOCAL_APPS = (
-    'admin.apps.PollsConfig',
-    'auth.apps.PollsConfig',
-    'client.apps.PollsConfig',
+    'client.apps.ClientConfig',
+    'myAuth.apps.MyauthConfig',
+    'myAdmin.apps.MyadminConfig',
 )
 
 THIRD_APPS = (
@@ -49,7 +49,7 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
 )
 
-INSTALLED_APPS = THIRD_APPS + LOCAL_APPS + DJANGO_APPS
+INSTALLED_APPS = THIRD_APPS + DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

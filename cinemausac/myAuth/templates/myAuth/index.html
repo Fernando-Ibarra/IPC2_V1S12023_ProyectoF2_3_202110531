@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-dark">
+    <div class="container-fluid d-flex justify-content-between">
+      <a class="navbar-brand text-white" href="#">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+        USAC-Cinema
+      </a>
+      <div class="" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'auth:login' %}">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'auth:register' %}">Registrarse</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid m-3">
+    <ul class="nav justify-content-center nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link " href="">category</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">category</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">category</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">category</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">category</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container-fluid mt-2 text-center">
+    {% comment %} TODO CARRUSEL {% endcomment %}
+  </div>
+
+  <div class="container-fluid mt-2 text-center">
+    <div class="row m-1">
+      <div class="col">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Dune_%282021_film%29.jpg/220px-Dune_%282021_film%29.jpg" class="rounded img-fluid" alt="Logo Película">
+      </div>
+      <div class="col">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Dune_%282021_film%29.jpg/220px-Dune_%282021_film%29.jpg" class="rounded img-fluid" alt="Logo Película">
+      </div>
+      <div class="col">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Dune_%282021_film%29.jpg/220px-Dune_%282021_film%29.jpg" class="rounded img-fluid" alt="Logo Película">
+      </div>
+      <div class="col">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Dune_%282021_film%29.jpg/220px-Dune_%282021_film%29.jpg" class="rounded img-fluid" alt="Logo Película">
+      </div>
+      <div class="col">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Dune_%282021_film%29.jpg/220px-Dune_%282021_film%29.jpg" class="rounded img-fluid" alt="Logo Película">
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

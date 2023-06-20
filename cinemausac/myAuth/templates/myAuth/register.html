@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | Register</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+          <a class="navbar-brand text-white" href="{% url 'auth:index' %}">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+            USAC-Cinema
+          </a>
+          <div class="" id="navbarSupportedContent">
+          </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-5 w-50">
+        <p class="text-black fs-1 fw-bold text-center">Crear una cuenta nueva</p>
+        {% comment %} action="{% url 'auth:index' %}" {% endcomment %}
+        <form method="post" >
+          {% csrf_token %}
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="floatingName" placeholder="Nombre" name="name">
+                <label for="floatingName">Nombre</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="floatingLastName" placeholder="Apellidos" name="lastName">
+                <label for="floatingLastName">Apellidos</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating">
+                <input type="email" class="form-control" id="floatingEmail" placeholder="Correo Electrónico" name="email">
+                <label for="floatingEmail">Correo Electrónico</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña" name="password">
+                <label for="floatingPassword">Contraseña</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="floatingPhone" placeholder="Telefóno" name="phone">
+                <label for="floatingPhone">Telefóno</label>
+              </div>
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          {% if error_message %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ error_message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+          {% if success_message %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ success_message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+          <button type="submit" class="btn btn-success text-white">Registrar</button>
+        </form>
+
+        <br>
+
+        <p class="text-center">¿Ya tienes tu cuenta en USAC-Cinema? <a href="{% url 'auth:login' %}">Inicia esión</a> </p>
+    </div>
+</body>
+</html>
