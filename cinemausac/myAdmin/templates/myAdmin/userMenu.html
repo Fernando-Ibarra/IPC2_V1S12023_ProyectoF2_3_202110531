@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | ADMIN</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-white" href="{% url 'myAdmin:index' %}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                USAC-Cinema
+            </a>
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'auth:index' %}">Cerrar sesión</a>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row mt-2">
+            <div class="col">
+                <div class="container-fluid border rounded-3 p-2 shadow">
+                    <p class="text-black fs-3 fw-bold text-center">Crear un nuevo usuario</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingName" placeholder="Nombre" name="name">
+                                    <label for="floatingName">Nombre</label>                        
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingLastName" placeholder="Apellidos" name="lastName">
+                                    <label for="floatingLastName">Apellidos</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control h-25" id="floatingEmail" placeholder="Correo Electrónico" name="email">
+                                    <label for="floatingEmail">Correo Electrónico</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control h-25" id="floatingPassword" placeholder="Contraseña" name="password">
+                                    <label for="floatingPassword">Contraseña</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingPhone" placeholder="Telefóno" name="phone">
+                                    <label for="floatingPhone">Telefóno</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select class="form-select h-25" name="rol">
+                                        <option selected>Seleccióne el Rol</option>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="cliente">Cliente</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        {% if error_message %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              {{ error_message }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        {% if success_message %}
+                          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ success_message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-success text-white">Registrar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div class="container-fluid border rounded-3 p-2 h-auto shadow">
+                    <form method="post" action="{% url 'myAdmin:userXml' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">Cargar usuarios por medio de XML</p>
+                            </div>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success text-white">Importar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="post" action="{% url 'myAdmin:xmlUser' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">Descargar usuarios por medio de XML</p>
+                            </div>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success text-white">Exportar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if ListaUsuarios %}
+        <div class="container mt-5 w-75">
+            <table class="table table-striped shadow">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Telefóno</th>
+                        <th scope="col">Contraseña</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in ListaUsuarios %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.phoneNUmber }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.rol  }}</td>
+                            <td>
+                                <div class="row m-0 p-0">
+                                    <div class="col m-0 p-0">
+                                        <a class="nav-link m-0 p-0" href="{% url 'myAdmin:userUpdate' forloop.counter %}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFC857" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
+                                    </div>
+                                    <div class="col m-0 p-0">
+                                        <a class="nav-link m-0 p-0" href="{% url 'myAdmin:userDelete' forloop.counter %}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DB3A34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a>    
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</body>
+</html>

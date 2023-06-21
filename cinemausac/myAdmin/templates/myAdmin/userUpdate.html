@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | ADMIN</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-white" href="{% url 'myAdmin:userMenu' %}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                USAC-Cinema
+            </a>
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'auth:index' %}">Cerrar sesión</a>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-5 w-50">
+        <div class="container-fluid border rounded-3 p-2 shadow">
+            <p class="text-black fs-3 fw-bold text-center">Actualizar usuario</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control h-25" id="floatingName" placeholder="Nombre" name="name">
+                            <label for="floatingName">Nombre</label>                        
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control h-25" id="floatingLastName" placeholder="Apellidos" name="lastName">
+                            <label for="floatingLastName">Apellidos</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="email" class="form-control h-25" id="floatingEmail" placeholder="Correo Electrónico" name="email">
+                            <label for="floatingEmail">Correo Electrónico</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="password" class="form-control h-25" id="floatingPassword" placeholder="Contraseña" name="password">
+                            <label for="floatingPassword">Contraseña</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control h-25" id="floatingPhone" placeholder="Telefóno" name="phone">
+                            <label for="floatingPhone">Telefóno</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <select class="form-select h-25" name="rol">
+                                <option selected>Seleccióne el Rol</option>
+                                <option value="administrador">Administrador</option>
+                                <option value="cliente">Cliente</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success text-white">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

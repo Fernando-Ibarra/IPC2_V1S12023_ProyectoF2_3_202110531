@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,111 +27,82 @@
     </nav>
 
     {% if name and lastName %}
-        <div class="container mt-5 w-60">
+        <div class="container mt-3 w-60">
             <p class="fs-1 fw-bold text-black">{{ name }} {{ lastName }}, ¿Qué deseas hacer hoy?</p>
         </div>
     {% endif %}
 
-    <div class="container mt-3 w-60">
+    <div class="container mt-3 w-75">
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col">
-                <div class="d-flex position-relative bg-light rounder-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75" viewBox="0 0 24 24" fill="none" stroke="#F9AB55"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#F9AB55"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     <div class="ms-1">
                       <h5 class="mt-0">Gestión Usuarios</h5>
                       <p class="text-break">Aca podrás editar, mostrar, modificar o eliminar algún usuario. Ingresa para poder gestionar la información de cualquier usuario, haciendo unicamente un click y con la facilidad de usar Django.</p>
-                      <a href="#" class="nav-link ">Ir ahí</a>
+                      <a href="{% url 'myAdmin:userMenu' %}" class="nav-link ms-1">Ir ahí</a>
                     </div>
                   </div>
             </div>
             <div class="col">
-                <div class="d-flex position-relative bg-light rounder-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75" viewBox="0 0 24 24" fill="none" stroke="#124B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#124B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                     <div>
                       <h5 class="mt-0">Gestión Categorías</h5>
                       <p class="text-break">Aca podrás editar, mostrar, modificar o eliminar algún categorías. Ingresa para poder gestionar la información de cualquier categorías, haciendo unicamente un click y con la facilidad de usar Django.</p>
-                      <a href="#" class="nav-link ">Ir ahí</a>
+                      <a href="#" class="nav-link ms-1">Ir ahí</a>
                     </div>
                   </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col">
-                <div class="d-flex position-relative bg-light rounder-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75" viewBox="0 0 24 24" fill="none" stroke="#ED217C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-film"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#ED217C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-film"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
                     <div class="ms-1">
                       <h5 class="mt-0">Gestión Películas</h5>
                       <p class="text-break">Aca podrás editar, mostrar, modificar o eliminar algún películas. Ingresa para poder gestionar la información de cualquier películas, haciendo unicamente un click y con la facilidad de usar Django.</p>
-                      <a href="#" class="nav-link ">Ir ahí</a>
+                      <a href="#" class="nav-link ms-1">Ir ahí</a>
                     </div>
                   </div>
             </div>
             <div class="col">
-                <div class="d-flex position-relative bg-light rounder-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75" viewBox="0 0 24 24" fill="none" stroke="#302F4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#302F4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                     <div>
                       <h5 class="mt-0">Gestión Cines</h5>
                       <p class="text-break">Aca podrás editar, mostrar, modificar o eliminar algún cines. Ingresa para poder gestionar la información de cualquier cines, haciendo unicamente un click y con la facilidad de usar Django.</p>
-                      <a href="#" class="nav-link ">Ir ahí</a>
+                      <a href="{% url 'myAdmin:theaterMenu' %}" class="nav-link ms-1">Ir ahí</a>
                     </div>
                   </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col">
-                <div class="d-flex position-relative bg-light rounder-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75" viewBox="0 0 24 24" fill="none" stroke="#8CB369" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tv"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#8CB369" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tv"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
                     <div class="ms-1">
                       <h5 class="mt-0">Gestión Salas</h5>
                       <p class="text-break">Aca podrás editar, mostrar, modificar o eliminar algún salas. Ingresa para poder gestionar la información de cualquier salas, haciendo unicamente un click y con la facilidad de usar Django.</p>
-                      <a href="#" class="nav-link ">Ir ahí</a>
+                      <a href="#" class="nav-link ms-1">Ir ahí</a>
                     </div>
                   </div>
             </div>
             <div class="col">
-                <div class="d-flex position-relative bg-light rounder-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75" viewBox="0 0 24 24" fill="none" stroke="#E54B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#E54B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                     <div>
                       <h5 class="mt-0">Gestión Compras</h5>
                       <p class="text-break">Aca podrás editar, mostrar, modificar o eliminar algún compras. Ingresa para poder gestionar la información de cualquier compras, haciendo unicamente un click y con la facilidad de usar Django.</p>
-                      <a href="#" class="nav-link ">Ir ahí</a>
+                      <a href="#" class="nav-link ms-1">Ir ahí</a>
                     </div>
                   </div>
             </div>
         </div>
     </div>
-
-    {% if ListaUsuarios %}
-        <div class="container mt-5 w-60">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Telefóno</th>
-                        <th scope="col">Contraseña</th>
-                        <th scope="col">Rol</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in ListaUsuarios %}
-                        <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ user.name }}</td>
-                            <td>{{ user.lastName }}</td>
-                            <td>{{ user.phoneNUmber }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.rol  }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% endif %}
 
 </body>
 </html>
