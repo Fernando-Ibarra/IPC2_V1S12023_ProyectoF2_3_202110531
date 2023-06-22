@@ -55,6 +55,7 @@ class LinkedListTheater(object):
         while cur_node:
             yield cur_node.theater
             cur_node = cur_node.next
+
     
     def __iter__(self):
         return iter(self.loop())
@@ -84,7 +85,7 @@ class LinkedListTheater(object):
     def findNodeByName( self, name: str ) -> NodeTheater:
         auxNode = self.head
         while auxNode is not None:
-            if ( auxNode.theater.nombre == name ):
+            if ( auxNode.theater.name == name ):
                 return auxNode
             else:
                 auxNode = auxNode.next
@@ -147,7 +148,7 @@ class LinkedListTheater(object):
             nombre.text = node.theater.name
             salas = ET.SubElement( cine, 'salas' )
             internalIndex = 1
-            lim = node.theater.rooms.size
+            lim = node.theater.rooms.size + 1
             print(f"LIMITE { lim }")
             room = node.theater.rooms
             while internalIndex <= lim:

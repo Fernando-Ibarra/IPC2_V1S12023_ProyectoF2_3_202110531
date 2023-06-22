@@ -15,16 +15,16 @@ urlpatterns = [
     path('user/xml/export', views.xmlFromUser, name="xmlUser"),
     
     # * category
-    path('category/', views.index, name="categoryMeny"),
-    # TODO: UPDATE -> path('category/update/<int:id>', views., name="categoryUpdate")
-    # TODO: DELETE -> path('category/delete/<int:id>', views., name="categoryDelete")
-    # TODO: IMPORT XML -> path('category/xml/', views., name="categoryXml")
-    # TODO: EXPORT XML -> path('category/xml/export', views., name="xmlCategory")
+    path('category/', views.categoryMenu, name="categoryMenu"),
+    path('category/update/<int:id>', views.updateCategory, name="categoryUpdate"),
+    path('category/delete/<int:id>', views.deleteCategory, name="categoryDelete"),
+    path('category/xml/', views.categoryFromXml, name="categoryXml"),
+    path('category/xml/export', views.xmlFromCategory, name="xmlCategory"),
     
     # * movie
-    path('movie/', views.index, name="movieMenu"),
-    # TODO: UPDATE -> path('movie/update/<str:category>/<int:id>', views., name="movieUpdate")
-    # TODO: DELETE -> path('movie/delete/<str:category>/<int:id>', views., name="movieDelete")
+    path('movie/', views.movieMenu, name="movieMenu"),
+    # TODO: UPDATE -> path('movie/update/<str:categoryOne>/<int:id>', views., name="movieUpdate")
+    path('movie/delete/<str:categoryOne>/<int:id>', views.removeMovie, name="movieDelete"),
     
     # * theater
     path('theater/', views.theaterMenu, name="theaterMenu"),
@@ -34,16 +34,14 @@ urlpatterns = [
     path('theater/xml/export', views.xmlFromTheater, name="xmlTheater"),
     
     # * room
-    path('room/', views.index, name="roomMenu"),
-    # TODO: UPDATE -> path('room/update/<str:theater>/<int:id>', views., name="roomUpdate")
-    # TODO: DELETE -> path('room/delete/<str:theater>/<int:id>', views., name="roomDelete")
-    # TODO: IMPORT XML -> path()
-    # TODO: EXPORT XML -> path()
+    path('room/', views.roomMenu, name="roomMenu"),
+    path('room/update/<str:theaterOne>/<int:id>', views.updateRoom, name="roomUpdate"),
+    path('room/delete/<str:theaterOne>/<int:id>', views.deleteRoom, name="roomDelete"),
+
     
     # * ticket
     path('ticket/', views.index, name="ticketMenu"),
     # TODO: UPDATE -> path('ticket/update/<int:id>', views., name="ticketUpdate")
-    # TODO: DELETE -> path('ticket/delete/<int:id>', views., name="ticketDelete")
     
     # * CREDIT CARD
     

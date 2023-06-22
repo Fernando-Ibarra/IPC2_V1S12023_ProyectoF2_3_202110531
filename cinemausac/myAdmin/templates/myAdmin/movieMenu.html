@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | ADMIN</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-white" href="{% url 'myAdmin:index' %}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                USAC-Cinema
+            </a>
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'auth:index' %}">Cerrar sesión</a>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 w-50">
+        <div class="row mt-2">
+            <div class="col">
+                <div class="container-fluid border rounded-3 p-2 shadow">
+                    <p class="text-black fs-3 fw-bold text-center">Crear una nueva película</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if ListaCategoria %}
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <select class="form-select" aria-label="Default select example" name="category">
+                                                <option selected>Selecciona un cine</option>
+                                                {% for categoria in ListaCategoria %}
+                                                    <option value="{{ forloop.counter }}">{{ categoria.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% endif %}
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingTitle" placeholder="Titulo" name="title">
+                                    <label for="floatingTitle">Titulo</label>                        
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingDirector" placeholder="Director" name="director">
+                                    <label for="floatingDirector">Director</label>                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingYear" placeholder="Año" name="year">
+                                    <label for="floatingYear">Año</label>                        
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingDate" placeholder="Fecha" name="date">
+                                    <label for="floatingDate">Fecha</label>                        
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingTime" placeholder="Hora" name="time">
+                                    <label for="floatingTime">Hora</label>                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingImage" placeholder="Imagen" name="image">
+                                    <label for="floatingImage">Imagen</label>                        
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control h-25" id="floatingPrice" placeholder="Precio" name="price">
+                                    <label for="floatingPrice">Precio</label>                        
+                                </div>
+                            </div>
+                        </div>
+                        {% if error_message %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              {{ error_message }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                        {% if success_message %}
+                          <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ success_message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary text-white">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container accordion mt-5 mb-5 w-auto" id="accordionExample">
+        {% if ListaCategoria %}
+            {% for categoria in ListaCategoria %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapseOne" name="{{ forloop.counter }}">
+                        {{ categoria.name }}
+                      </button>
+                    </h2>
+                    <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                            <table class="table table-striped shadow">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Titulo</th>
+                                        <th scope="col">Director</th>
+                                        <th scope="col">Año</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Hora</th>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                {% for movie in categoria.movies  %}
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">{{ forloop.counter }}</th>
+                                            <td>{{ movie.title }}</td>
+                                            <td>{{ movie.director }}</td>
+                                            <td>{{ movie.year }}</td>
+                                            <td>{{ movie.date }}</td>
+                                            <td>{{ movie.time }}</td>
+                                            <td>{{ movie.image }}</td>
+                                            <td>{{ movie.price }}</td>
+                                            <td>
+                                                <div class="row m-0 p-0">
+                                                    <div class="col m-0 p-0">
+                                                        {% comment %} <a class="nav-link m-0 p-0" href="{% url 'myAdmin:categoryUpdate' category.name forloop.counter  %}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFC857" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a> {% endcomment %}
+                                                    </div>
+                                                    <div class="col m-0 p-0">
+                                                        <a class="nav-link m-0 p-0" href="{% url 'myAdmin:movieDelete' categoria.name forloop.counter  %}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DB3A34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a>    
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                {% endfor %}
+                            </table>
+                      </div>
+                    </div>
+                  </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</body>
+</html>

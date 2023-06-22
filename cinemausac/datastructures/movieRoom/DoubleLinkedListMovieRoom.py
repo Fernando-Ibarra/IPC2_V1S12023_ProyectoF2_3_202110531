@@ -28,7 +28,7 @@ class DoubleLinkedListMovieRoom(object):
         """
         return self.size == 0
        
-    def push( self, movieRoom: MovieRoom ) -> None:
+    def push( self, movieRoom: MovieRoom ) -> bool:
         """push - Add a MovieRoom to the back of the list
 
         Args:
@@ -45,7 +45,8 @@ class DoubleLinkedListMovieRoom(object):
             current.next = newest
             newest.prev = current
             self.size += 1
-        return None
+            ok = True
+            return ok
     
     def deleteNode( self, node: NodeMovieRoom ) -> None:
         """deleteNode Delete node from the list
@@ -55,9 +56,14 @@ class DoubleLinkedListMovieRoom(object):
         """
         predecessor: NodeMovieRoom = node.prev
         sucessor: NodeMovieRoom = node.next
-        predecessor.next = sucessor
-        sucessor.prev = predecessor
-        self.size -= 1
+        if( node.next is None ):
+            sucessor = None
+            predecessor.next = sucessor
+            self.size -= 1
+        else:
+            predecessor.next = sucessor
+            sucessor.prev = predecessor
+            self.size -= 1
         # deprecate Node
         node.prev = node.next = node.movieRoom = None
         return None

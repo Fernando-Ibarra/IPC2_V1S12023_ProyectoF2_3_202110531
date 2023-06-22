@@ -39,7 +39,7 @@ class LinkedUser(object):
         Args:
             e (NodeUser): User node
         """
-        newNode = node
+        newNode: NodeUser = node
         if self.isEmpty():
             self.tail = self.head = newNode
         else:
