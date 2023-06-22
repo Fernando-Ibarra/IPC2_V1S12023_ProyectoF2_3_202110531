@@ -23,7 +23,7 @@ urlpatterns = [
     
     # * movie
     path('movie/', views.movieMenu, name="movieMenu"),
-    # TODO: UPDATE -> path('movie/update/<str:categoryOne>/<int:id>', views., name="movieUpdate")
+    path('movie/update/<str:categoryOne>/<int:id>', views.updateMovie, name="movieUpdate"),
     path('movie/delete/<str:categoryOne>/<int:id>', views.removeMovie, name="movieDelete"),
     
     # * theater

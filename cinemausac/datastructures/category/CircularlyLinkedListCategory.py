@@ -111,7 +111,18 @@ class CircularlyLinkedListCategory(object):
                     index += 1
             return None
         
-    def findNode( self, indexCome: int ) -> NodeCategory:
+    def findNode( self, categoryOne: str ) -> NodeCategory:
+        auxNode: NodeCategory = self.head
+        while True:
+            if( auxNode.category.name == categoryOne ):
+                return auxNode
+            else:
+                auxNode = auxNode.next
+                if auxNode == self.head:
+                    break
+        return None
+    
+    def findNodeXML( self, indexCome: int ) -> NodeCategory:
         index: int = 1
         if self.head is None:
             print("La lista esta vacía")
@@ -125,7 +136,7 @@ class CircularlyLinkedListCategory(object):
                     if auxNode == self.head:
                         break
                     index += 1
-            return None
+            return None 
     
     def loop(self):
         cur_node: NodeCategory = self.head
@@ -169,13 +180,13 @@ class CircularlyLinkedListCategory(object):
         index = 1
         while index <= self.size:
             categoria = ET.SubElement( categorias, 'categoria' )
-            node = self.findNode( index )
+            node = self.findNodeXML( index )
             nombreD = node.category.name
             nombreC = ET.SubElement( categoria, 'nombre' )
             nombreC.text = nombreD
             internalIndex = 1
             peliculas = ET.SubElement( categoria, 'peliculas' )
-            while internalIndex <= node.category.movies.size:
+            while internalIndex <= node.category.movies.size + 1:
                 movie: m.Movie = node.category.movies.findMovie(internalIndex)
                 pelicula = ET.SubElement( peliculas, 'pelicula' )
                 nombre = ET.SubElement( pelicula, 'nombre' )

@@ -95,7 +95,7 @@ class LinkedListMovie(object):
             return None
         else:
             return None
-
+        
     def modifyMovie( self, indexCome: int, field: str, value ) -> None:
         index: int = 1
         auxNode = self.head
