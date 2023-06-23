@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 
 
-from datastructures import User, ListaUsuarios, NodeUser
+from datastructures import User, ListaUsuarios, NodeUser, ListaCategoria, ListaPeliculas
 # Create your views here.
 
 def index(request):
-    return render(request, 'myAuth/index.html', {})
+    return render(request, 'myAuth/index.html', {
+        "ListaCategoria": ListaCategoria,
+        "ListaPeliculas": ListaPeliculas,
+    })
 
 def register(request):
     user: User = None
@@ -68,8 +71,8 @@ def login(request):
                 request.session['lastName'] = user.lastName
                 return redirect('myAdmin:index')
             else:
-                return render( request, "myAuth/login.html", {
-                    "success_message": "usuario cliente"
-                })
+                request.session['name'] = user.name
+                request.session['lastName'] = user.lastName
+                return redirect('client:index')
                 
     return render(request, 'myAuth/login.html', {})

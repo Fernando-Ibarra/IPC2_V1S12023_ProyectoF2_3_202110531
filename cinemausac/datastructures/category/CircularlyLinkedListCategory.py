@@ -4,7 +4,7 @@ from xml.dom import minidom
 from . import Category, NodeCategory
 import datastructures.movie as m
 
-class CircularlyLinkedListCategory(object):
+class CircularlyLinkedListCategory():
 
     def __init__(self) -> None:
         """ Create an empty list """

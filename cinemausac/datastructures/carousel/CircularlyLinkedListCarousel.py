@@ -1,3 +1,6 @@
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+
 from . import Carousel, NodeCarousel
 
 class CircularlyLinkedListCarousel(object):
@@ -126,3 +129,28 @@ class CircularlyLinkedListCarousel(object):
                         break
                     index += 1
             return None
+        
+    def loop(self):
+        cur_node: NodeCarousel = self.head
+        while cur_node:
+            yield cur_node.carousel
+            cur_node = cur_node.next
+            
+            if cur_node == self.head:
+                break
+            
+    def __iter__(self):
+        return iter(self.loop())
+    
+    def createMoviesFromXML(self):
+        tree = ET.parse('listaPeliculas.xml')
+        root = tree.getroot()
+
+        for categoria in root.findall('categoria'):
+            for pelicula in categoria.findall('peliculas/pelicula'):
+                title: str = pelicula.find('titulo').text
+                image: str = pelicula.find('imagen').text
+
+                carousel:Carousel = Carousel( title, image )
+
+                self.push(carousel)

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | USUARIO</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-white" href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                USAC-Cinema
+            </a>
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'auth:index' %}">Cerrar sesión</a>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </nav>
+
+    {% if name and lastName %}
+        <div class="container mt-3 w-60">
+            <p class="fs-1 fw-bold text-black">{{ name }} {{ lastName }}, ¿Qué deseas hacer hoy?</p>
+        </div>
+    {% endif %}
+
+    <div class="container mt-3 w-75 mb-3">
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#F9AB55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-film"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                    <div class="ms-1">
+                      <h5 class="mt-0">Películas</h5>
+                      <p class="text-break">Acá podras ver todas las películas que tenemos a tu disposición, usando filtros o mostrando las películas más vistas actualemente. Dale continuar y sumgerte en las películas que tenemos para tí.</p>
+                      <a href="{% url 'client:moviesMenu' %}" class="nav-link ms-1">Ir ahí</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#124B4B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <div>
+                      <h5 class="mt-0">Películas Favoritas</h5>
+                      <p class="text-break">En esta sección vas a poder ver las películas que has guardado como favoritas, no dejas que se te olviden tus películas. Visita en cualquier momento y revive los recuerdos de las películas que más has disfrutado.</p>
+                      <a href="{% url 'myAdmin:categoryMenu' %}" class="nav-link ms-1">Ir ahí</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#ED217C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <div class="ms-1">
+                      <h5 class="mt-0">Comprar Boletos</h5>
+                      <p class="text-break">Te gustaría ir al cine? En esta sección vas a poder comprar todos los boletos que desees para tu película favorita, así mismo vas a poder seleccionar todos los detalles que desees.</p>
+                      <a href="{% url 'myAdmin:movieMenu' %}" class="nav-link ms-1">Ir ahí</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#302F4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    <div>
+                      <h5 class="mt-0">Historial de Compras</h5>
+                      <p class="text-break">Quieres recibir tu historial de comprar? Acá vas a poder ver todas las compras que has realizado, así mismo, vas a poder revisar a detalle cada visita al cine que haz hecho.</p>
+                      <a href="{% url 'myAdmin:theaterMenu' %}" class="nav-link ms-1">Ir ahí</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="shadow d-flex position-relative bg-light rounder-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-75 p-2" viewBox="0 0 24 24" fill="none" stroke="#8CB369" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                    <div class="ms-1">
+                      <h5 class="mt-0">Tarjeta de crédito</h5>
+                      <p class="text-break">Agrega tus tarjetas de crédito favoritas y ahorrate pasos al momento de realizar tu compra. Con tan solo un par de clicks, vas a poder agregar tus tarjetas de crédito favoritas. Hazlo de una vez!</p>
+                      <a href="{% url 'myAdmin:roomMenu' %}" class="nav-link ms-1">Ir ahí</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

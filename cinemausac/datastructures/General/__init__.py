@@ -1,1 +1,1 @@
-from .Util import ListaUsuarios, ListaCines, ListaCategoria, ListaPeliculas
+from .Util import ListaUsuarios, ListaCines, ListaCategoria, ListaPeliculas, ListaTarjetas

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | ADMIN</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-white" href="{% url 'myAdmin:index' %}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                USAC-Cinema
+            </a>
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'auth:index' %}">Cerrar sesión</a>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 w-50">
+        <div class="container-fluid border rounded-3 p-2 shadow">
+            <p class="text-black fs-3 fw-bold text-center">Actualizar tarjetas</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control h-25" id="floatingType" placeholder="Tipo" name="type">
+                            <label for="floatingType">Tipo</label>                        
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control h-25" id="floatingNumber" placeholder="Número" name="number">
+                            <label for="floatingNumber">Número</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control h-25" id="floatingOwner" placeholder="Titular" name="owner">
+                            <label for="floatingOwner">Titular</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control h-25" id="floatingExpiredTime" placeholder="Fecha Expiración" name="expiredTime">
+                            <label for="floatingExpiredTime">Fecha Expiración</label>
+                        </div>
+                    </div>
+                </div>
+                {% if error_message %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      {{ error_message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+                {% if success_message %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ success_message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endif %}
+                <button type="submit" class="btn btn-secondary text-white">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

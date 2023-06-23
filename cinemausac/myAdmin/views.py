@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from datastructures import User, Theater,  MovieRoom, Category,  Movie
-from datastructures import NodeUser, NodeTheater, NodeMovieRoom, NodeCategory, NodeMovie
+from datastructures import User, Theater,  MovieRoom, Category,  Movie, CreditCard, Carousel
+from datastructures import NodeUser, NodeTheater, NodeMovieRoom, NodeCategory, NodeMovie, NodeCreditCard
 from datastructures import DoubleLinkedListMovieRoom, LinkedListMovie
-from datastructures import ListaUsuarios, ListaCines, ListaCategoria, ListaPeliculas
+from datastructures import ListaUsuarios, ListaCines, ListaCategoria, ListaPeliculas, ListaTarjetas
 
 # Create your views here.
 def index(request):
@@ -310,6 +310,7 @@ def categoryMenu(request):
 def categoryFromXml(request):
     if request.method == "POST":
         ListaCategoria.createCategoriesFromXML()
+        ListaPeliculas.createMoviesFromXML()
     return redirect('myAdmin:categoryMenu')
 
 def xmlFromCategory(request):
@@ -338,6 +339,7 @@ def updateCategory(request, id: int):
 
 def movieMenu(request):
     movie: Movie = None
+    carousel: Carousel = None
     categoryOne: int = None
     try:
         if request.method == "POST":
@@ -351,8 +353,8 @@ def movieMenu(request):
                 time: str = request.POST.get('time')
                 image: str = request.POST.get('image')
                 price: int = int(request.POST.get('price'))
-                movie = Movie( title, director, year, date, time, image, price )
-                
+                movie: Movie = Movie( title, director, year, date, time, image, price )
+                carousel: Carousel = Carousel( title, image )
                 categoryOne = int( request.POST.get('category') )
     except:
         return render( request, "myAdmin/movieMenu.html", {
@@ -360,10 +362,11 @@ def movieMenu(request):
         })
     else:
         if movie is not None:
-            nodeMovie: NodeMovie = NodeMovie( movie ) 
+            nodeMovie: NodeMovie = NodeMovie( movie )
             nodeCategory: NodeCategory = ListaCategoria.findNode( categoryOne )
             if nodeCategory is not None:
                 ok = nodeCategory.category.movies.push( nodeMovie )
+                ListaPeliculas.push( carousel )
 
                 if ok is not True:
                     return render( request, "myAdmin/movieMenu.html", {
@@ -457,4 +460,105 @@ def updateMovie(request, categoryOne: str, id: int ):
     return render( request, "myAdmin/movieUpdate.html", {
         "id": id,
         "categoryOne": categoryOne
+    })
+
+# * CREDIT CARD
+
+def cardMenu(request):
+    creditCard: CreditCard = None
+    try:
+        if request.method == "POST":
+            if( request.POST.get('type') is None and request.POST.get('number') is None and request.POST.get('owner') is None and request.POST.get('expiredTime') is None ):
+                pass
+            else:
+                typeC = request.POST.get('type')
+                number = request.POST.get('number')
+                owner = request.POST.get('owner')
+                expiredTime = request.POST.get('expiredTime')
+                
+                creditCard = CreditCard( typeC, number, owner, expiredTime )
+            
+    except:
+        return render( request, "myAdmin/creditCardMenu.html", {
+            "error_message": "Ocurrio un problema, vuelve a registrarte"
+        })
+    else:
+        if creditCard is not None:
+            ok = ListaTarjetas.push( creditCard )
+        
+            if ok is not True:
+                return render( request, "myAdmin/creditCardMenu.html", {
+                    "error_message": "Ocurrio un problema, vuelve a registrarte",
+                })
+
+            
+            return redirect('myAdmin:cardMenu')
+            
+    return render(request, 'myAdmin/creditCardMenu.html', {
+        "ListaTarjetas": ListaTarjetas,
+    })
+
+def cardFromXml(request):
+    if request.method == "POST":
+        ListaTarjetas.createCardFromXML()
+    return redirect('myAdmin:cardMenu')
+
+def xmlFromCard(request):
+    if request.method == "POST":
+        ListaTarjetas.createXMLFromCard()
+    return redirect('myAdmin:cardMenu')
+    
+def deleteCard(request, id: int ):
+    nodeCreditCard: NodeCreditCard = ListaTarjetas.findNode( id )
+    ListaTarjetas.deleteNode( nodeCreditCard )
+    return redirect('myAdmin:cardMenu')
+    
+def updateCard(request, id: int):
+    if request.method == "POST":
+        changes = []
+        
+        if ( request.POST.get('type') is not "" ):
+            typeC = request.POST.get('type')
+            myChanges = {
+                "field": "type",
+                "value": typeC
+            }
+            
+            changes.append(myChanges)
+        
+        if ( request.POST.get('number') is not ""):
+            number = request.POST.get('number')
+            myChanges = {
+                "field": "number",
+                "value": number
+            }
+            
+            changes.append(myChanges)
+        
+        if ( request.POST.get('owner') is not ""):
+            owner = request.POST.get('owner')
+            myChanges = {
+                "field": "owner",
+                "value": owner
+            }
+            
+            changes.append(myChanges)       
+                
+        if ( request.POST.get('expiredTime') is not ""):
+            expiredTime = request.POST.get('expiredTime')
+            myChanges = {
+                "field": "expiredTime",
+                "value": expiredTime
+            }
+            
+            changes.append(myChanges)       
+
+        for change in changes:
+            ListaTarjetas.modifyCard( id, change["field"], change["value"] )         
+        
+        return redirect('myAdmin:cardMenu')
+    
+    return render( request, "myAdmin/creditCardMenuUpdate.html", {
+        "id": id,
+        "ListaTarjetas": ListaTarjetas,
     })

@@ -44,6 +44,11 @@ urlpatterns = [
     # TODO: UPDATE -> path('ticket/update/<int:id>', views., name="ticketUpdate")
     
     # * CREDIT CARD
+    path('card/', views.cardMenu, name="cardMenu"),
+    path('card/update/<int:id>', views.updateCard, name="cardUpdate"),
+    path('card/delete/<int:id>',  views.deleteCard, name="cardDelete"),
+    path('card/xml/', views.cardFromXml, name="cardXml"),
+    path('card/xml/export', views.xmlFromCard, name="xmlCard"),
     
     # * MOVIE LIST
     
