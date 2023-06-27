@@ -122,6 +122,18 @@ class CircularlyLinkedListCategory():
                     break
         return None
     
+    def findMovie( self, movieOne: str ) -> m.Movie:
+        auxNode: NodeCategory = self.head
+        while True:
+            ok, movie = auxNode.category.movies.findMovieByName( movieOne )
+            if( ok ):
+                return movie
+            else:
+                auxNode = auxNode.next
+                if auxNode == self.head:
+                    break
+        return None
+    
     def findNodeXML( self, indexCome: int ) -> NodeCategory:
         index: int = 1
         if self.head is None:

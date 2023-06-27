@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | USUARIO</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-white" href="{% url 'client:index' %}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                USAC-Cinema
+            </a>
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'auth:index' %}">Cerrar sesión</a>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </nav>
+
+    {% if success_message != None %}
+    <div class="alert alert-success alert-dismissible fade show mt-2 rounder-2" role="alert">
+        {{ success_message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    {% if ListaCategoria %}
+        <div class="container w-75 mt-3 mb-3 shadow rounded-4">
+            <div class="row">
+                <p class="fs-2 text-black fw-bold">Adquiere tus boletos</p>
+            </div>
+            
+            <form method="post">    
+                {% csrf_token %}
+                    <div class="row">
+                        <p class="fs-4 text-black fw-bold">Selecciona tu cine y sala favortia</p>
+                    </div>
+                    
+                    <div class="row">
+                        {% for cine in ListaCines %}
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="theater" id="theater" value="{{cine.name}}">
+                                    <label class="form-check-label" for="theater">{{ cine.name }}</label>
+                                    <div class="container p-1">
+                                        {% if cine.rooms %}
+                                            {% for room in cine.rooms %}
+                                                {% if room != None %}
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="room" id="room" value="{{room.number}}">
+                                                        <label class="form-check-label" for="room">
+                                                            Sala: {{ room.number }} - Asientos: {{ room.seats }}
+                                                        </label>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <p class="text-wrap">No hay salas disponibles en este cine</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="row mt-2">
+                        <p class="fs-4 text-black fw-bold">Selecciona tu película</p>
+                    </div>
+                    <div class="row">
+                        {% for categoria in ListaCategoria %}
+                            <div class="col">
+                                <p class="fs-5">{{ categoria.name }}</p>
+                                <div class="container p-1">
+                                    {% if categoria.movies %}
+                                        {% for movie in categoria.movies  %}
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="movie" id="movie" value="{{ movie.title }}">
+                                                <label class="form-check-label" for="movie"> 
+                                                    <strong>Titulo:</strong> {{ movie.title }}
+                                                    <strong>Director:</strong> {{ movie.director }}
+                                                    <strong>Fecha:</strong> {{ movie.date }}
+                                                    <strong>Hora:</strong> {{ movie.time }}
+                                                    <strong>Precio:</strong> {{ movie.price }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                    <p class="text-wrap">No hay películas en esta categoría</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                
+
+                <div class="row">
+                    <p class="fs-4 text-black fw-bold">Cantidad de boletos</p>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="amount" placeholder="name@example.com" name="amount">
+                            <label for="amount">Cantidad</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <p class="fs-4 text-black fw-bold">Número de Asientos</p>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="seat" placeholder="name@example.com" name="seat">
+                            <label for="seat">Asientos</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <p class="fs-4 text-black fw-bold">Selecciona tu método de pago</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment" id="payment" value="cash">
+                            <label class="form-check-label" for="payment">
+                              Efectivo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment" id="payment" value="card">
+                            <label class="form-check-label" for="payment">
+                              Tarjeta
+                            </label>
+                            <div class="container p-1">
+                                {% if ListaTarjetas %}
+                                    {% for tarjeta in ListaTarjetas %}
+                                        {% if tarjeta.owner == name %}
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio">
+                                                <label class="form-check-label" for="flexRadio">
+                                                  {{ tarjeta.type }} - {{ tarjeta.number }} - {{ tarjeta.expiredTime }}
+                                                </label>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                <p class="text-wrap">No tienen tarjetas registradas</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <p class="fs-4 text-black fw-bold">¿Desea factura?</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="fact" id="fact" value="cf">
+                            <label class="form-check-label" for="fact">
+                              C/F
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="fact" id="fact" value="nocf">
+                            <label class="form-check-label" for="fact">
+                              Información a Facturar
+                            </label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="nit" placeholder="name@example.com" name="nit">
+                            <label for="nit">NIT</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="direction" placeholder="name@example.com" name="direction">
+                            <label for="direction">Dirección</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary text-white mb-3">Comprar</button>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if error_message %}
+    <div class="alert alert-danger alert-dismissible fade show mt-2 rounder-2" role="alert">
+        {{ error_message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    {% if error_messageSeats %}
+    <div class="alert alert-danger alert-dismissible fade show mt-2 rounder-2" role="alert">
+        {{ error_messageSeats }} 
+        <button type="button" class="btn-close" data-bs-dismis s="alert" aria-label="Close"></button>
+    </div> 
+    {% endif %} 
+ 
+    {% if error_messageSeat %} 
+    <div class="alert alert-danger alert-dismissible fade show mt-2 rounder-2" role="alert">
+        {{ error_messageSeat }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+</body>
+</html>

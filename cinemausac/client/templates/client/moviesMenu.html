@@ -65,7 +65,7 @@
                                             <td class="text-center">{{ movie.time }}</td>
                                             <td class="text-center">{{ movie.price }}</td>
                                             <td class="text-center">
-                                                <a class="nav-link m-0 p-0" href=""><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DB3A34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></a>
+                                                <a class="nav-link m-0 p-0" href="{% url 'client:favoriteMovie' categoria.name forloop.counter %}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DB3A34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -77,6 +77,45 @@
             {% endfor %}
         </div>
     {% endif %}
-    
+
+    {% if ListaFavMovie %}
+        <div class="container mt-2 mb-4 h-25 w-50">
+            <div class="row">
+                <div class="col">
+                    <p class="fs-2 text-black">¡Tus películas favoritas!</p>
+                </div>
+                <div class="col">
+                    <div id="carouselExampleControls" class="carousel slide shadow" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for favMovie in ListaFavMovie  %}
+                                {% if forloop.first %}
+                                    <div class="carousel-item active">
+                                        <img src="{{ favMovie.image }}" class="d-block w-100" alt="{{ favMovie.title }}">
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item">
+                                        <img src="{{ favMovie.image }}" class="d-block w-100" alt="{{ favMovie.title }}">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}  
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container mt-3 w-auto">
+            <p class="fs-2 text-black">¡Aún no tienes películas favoritas agregadas!</p>
+        </div>
+    {% endif %}
+
 </body>
 </html>

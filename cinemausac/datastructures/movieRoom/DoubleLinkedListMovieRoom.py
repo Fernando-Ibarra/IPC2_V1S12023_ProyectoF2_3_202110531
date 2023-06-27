@@ -106,6 +106,15 @@ class DoubleLinkedListMovieRoom(object):
                 index += 1
         return None
     
+    def findRoomByName( self, room: str ) -> MovieRoom:
+        auxNode: NodeMovieRoom = self.head
+        while auxNode is not None:
+            if( auxNode.movieRoom.number == room ):
+                return auxNode.movieRoom
+            else:
+                auxNode = auxNode.next
+        return None
+    
     def loop(self):
         cur_node: NodeMovieRoom = self.head
         while cur_node:

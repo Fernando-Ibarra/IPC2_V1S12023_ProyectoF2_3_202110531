@@ -67,6 +67,15 @@ class LinkedListMovie(object):
                 index += 1
         return None
     
+    def findMovieByName( self, movieOne: int ) -> bool:
+        auxNode = self.head
+        while auxNode is not None:
+            if ( auxNode.movie.title == movieOne ):
+                return True, auxNode.movie
+            else:
+                auxNode = auxNode.next
+        return False
+    
     def findNode( self, indexCome: int ) -> NodeMovie:
         index: int = 1
         auxNode = self.head
