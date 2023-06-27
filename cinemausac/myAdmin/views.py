@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from datastructures import User, Theater,  MovieRoom, Category,  Movie, CreditCard, Carousel
 from datastructures import NodeUser, NodeTheater, NodeMovieRoom, NodeCategory, NodeMovie, NodeCreditCard
 from datastructures import DoubleLinkedListMovieRoom, LinkedListMovie
-from datastructures import ListaUsuarios, ListaCines, ListaCategoria, ListaPeliculas, ListaTarjetas
+from datastructures import ListaUsuarios, ListaCines, ListaCategoria, ListaPeliculas, ListaTarjetas, ListaTickets
 
 # Create your views here.
 def index(request):
@@ -562,3 +562,21 @@ def updateCard(request, id: int):
         "id": id,
         "ListaTarjetas": ListaTarjetas,
     })
+    
+    
+def historyShop(request):
+    return render(request, "myAdmin/historyMenu.html", {
+        "ListaTickets": ListaTickets
+    })
+
+def cancelShop(request, id: str ):
+    for ticket in ListaTickets:
+        if ticket.get('id') == id:
+            ticket['estado'] = 'Cancelada'
+            break
+    
+    return render(request, "myAdmin/historyMenu.html", {
+        "ListaTickets": ListaTickets
+    })
+            
+        

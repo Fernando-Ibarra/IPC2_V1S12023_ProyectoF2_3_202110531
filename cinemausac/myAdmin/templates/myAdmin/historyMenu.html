@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | ADMIN</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-white" href="{% url 'myAdmin:index' %}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                USAC-Cinema
+            </a>
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'auth:index' %}">Cerrar sesión</a>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </nav>
+
+    {% if ListaTickets %}    
+        <div class="container-fluid mt-5 shadow-lg">
+            <div class="p-1">
+                <table class="table table-striped caption-top">
+                    <caption>Lista de compras</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">id</th>
+                            <th scope="col">Película</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Sala</th>
+                            <th scope="col">Asientos</th>
+                            <th scope="col">Total</th>
+                            <th scope="col" class="text-nowrap">Tipo de Pago</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">NIT</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Cancelar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in ListaTickets %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td class="text-nowrap">{{ ticket.id }}</td>
+                                    <td class="text-nowrap">{{ ticket.película }}</td>
+                                    <td class="text-nowrap">{{ ticket.fecha }}</td>
+                                    <td class="text-nowrap">{{ ticket.hora }}</td>
+                                    <td class="text-nowrap">{{ ticket.cantidad }}</td>
+                                    <td class="text-nowrap">{{ ticket.sala }}</td>
+                                    <td class="text-nowrap">{{ ticket.asientos }}</td>
+                                    <td class="text-nowrap">{{ ticket.total }}</td>
+                                    <td class="text-nowrap">{{ ticket.tipodepago }}</td>
+                                    <td class="text-nowrap">{{ ticket.nit }}</td>
+                                    <td class="text-nowrap">{{ ticket.Nombre }}</td>
+                                    <td class="text-nowrap">{{ ticket.direction }}</td>
+                                    <td class="text-nowrap">{{ ticket.estado }}</td>
+                                    <td>
+                                        <div class="row m-0 p-0">
+                                            <a class="nav-link m-0 p-0" href="{% url 'myAdmin:ticketCanceled' ticket.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+
+</body>
+</html>
