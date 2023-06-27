@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USAC - CINEMA | USUARIO</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-white" href="{% url 'client:index' %}">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Usac_logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                USAC-Cinema
+            </a>
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'auth:index' %}">Cerrar sesión</a>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </nav>
+
+    {% if ListaTickets %}    
+        <div class="container-fluid mt-5 shadow-lg">
+            <div class="p-1">
+                <table class="table table-striped caption-top">
+                    <caption>Lista de compras</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">id</th>
+                            <th scope="col">Película</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Sala</th>
+                            <th scope="col">Asientos</th>
+                            <th scope="col">Total</th>
+                            <th scope="col" class="text-nowrap">Tipo de Pago</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">NIT</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in ListaTickets %}
+                            {% if ticket.nameUser == name %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td class="text-nowrap">{{ ticket.id }}</td>
+                                    <td class="text-nowrap">{{ ticket.película }}</td>
+                                    <td class="text-nowrap">{{ ticket.fecha }}</td>
+                                    <td class="text-nowrap">{{ ticket.hora }}</td>
+                                    <td class="text-nowrap">{{ ticket.cantidad }}</td>
+                                    <td class="text-nowrap">{{ ticket.sala }}</td>
+                                    <td class="text-nowrap">{{ ticket.asientos }}</td>
+                                    <td class="text-nowrap">{{ ticket.total }}</td>
+                                    <td class="text-nowrap">{{ ticket.tipodepago }}</td>
+                                    <td class="text-nowrap">{{ ticket.nit }}</td>
+                                    <td class="text-nowrap">{{ ticket.Nombre }}</td>
+                                    <td class="text-nowrap">{{ ticket.direction }}</td>
+                                    <td class="text-nowrap">{{ ticket.estado }}</td>
+                                </tr>
+                            {% else %}
+                                <p class="fs-4 text-bold text-black">No tienes compras aún</p>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+</body>
+</html>

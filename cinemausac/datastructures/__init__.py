@@ -5,4 +5,5 @@ from .movie import Movie, NodeMovie, LinkedListMovie
 from .category import Category, NodeCategory, CircularlyLinkedListCategory
 from .carousel import Carousel, NodeCarousel, CircularlyLinkedListCarousel
 from .creditCard import CreditCard, NodeCreditCard, DoubleLinkedListCreditCard
-from .General import ListaUsuarios, ListaCines, ListaPeliculas, ListaCategoria, ListaTarjetas
+from .favMovie import FavMovie
+from .General import ListaUsuarios, ListaCines, ListaPeliculas, ListaCategoria, ListaTarjetas, ListaFavMovie, ListaTickets

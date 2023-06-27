@@ -1,0 +1,1 @@
+from .FavMovie import FavMovie
