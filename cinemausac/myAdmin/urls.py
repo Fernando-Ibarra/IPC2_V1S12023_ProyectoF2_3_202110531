@@ -40,8 +40,8 @@ urlpatterns = [
 
     
     # * ticket
-    path('ticket/', views.index, name="ticketMenu"),
-    # TODO: UPDATE -> path('ticket/update/<int:id>', views., name="ticketUpdate")
+    path('ticket/', views.historyShop, name="ticketMenu"),
+    path('ticket/delete/<str:id>', views.cancelShop, name="ticketCanceled"),
     
     # * CREDIT CARD
     path('card/', views.cardMenu, name="cardMenu"),
