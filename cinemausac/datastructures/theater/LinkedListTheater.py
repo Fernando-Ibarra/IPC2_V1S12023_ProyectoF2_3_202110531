@@ -82,6 +82,15 @@ class LinkedListTheater(object):
                 index += 1
         return None
     
+    def findNodeByName( self, theaterOne: str ) -> NodeTheater:
+        auxNode = self.head
+        while auxNode is not None:
+            if ( auxNode.theater.name == theaterOne ):
+                return auxNode
+            else:
+                auxNode = auxNode.next
+        return None
+    
     def findTheaterByName( self, nameOne: str ) -> Theater:
         auxNode = self.head
         while auxNode is not None:
