@@ -629,7 +629,6 @@ def serverToCard(request):
             
         return redirect('myAdmin:cardMenu')
 
-
 def deleteCard(request, id: int ):
     nodeCreditCard: NodeCreditCard = ListaTarjetas.findNode( id )
     ListaTarjetas.deleteNode( nodeCreditCard )
