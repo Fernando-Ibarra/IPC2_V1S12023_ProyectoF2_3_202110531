@@ -30,7 +30,7 @@
         <div class="row mt-2">
             <div class="col">
                 <div class="container-fluid border rounded-3 p-2 shadow">
-                    <p class="text-black fs-3 fw-bold text-center">Crear una nueva tarjetas</p>
+                    <p class="text-black fs-3 fw-bold text-center">Crear una nueva tarjeta</p>
                     <form method="post">
                         {% csrf_token %}
                         <div class="row mb-3">
@@ -86,6 +86,17 @@
                         <div class="row">
                             <div class="col">
                                 <p class="text-center">Cargar tarjetas por medio de XML</p>
+                            </div>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-secondary text-white">Importar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="post" action="{% url 'myAdmin:cardJSON' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">Cargar tarjetas por medio de API</p>
                             </div>
                             <div class="col text-center">
                                 <button type="submit" class="btn btn-secondary text-white">Importar</button>

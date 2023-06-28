@@ -14,8 +14,7 @@ def index(request):
         "name": name,
         "lastName": lastName,
     })
-    
-    
+       
 # * USER
     
 def userMenu(request):
@@ -93,9 +92,7 @@ def serverToUser(request):
                             "error_message": "Ocurrio un problema, vuelve a registrarte",
                         })
             
-    return render(request, 'myAdmin/userMenu.html', {
-        "ListaUsuarios": ListaUsuarios,
-    })
+    return redirect('myAdmin:userMenu')
     
 def updateUser(request, id: int):
     if request.method == "POST":
@@ -164,7 +161,6 @@ def updateUser(request, id: int):
         "id": id
     })
 
-
 # * THEATER
 def theaterMenu(request):
     theater: Theater = None
@@ -206,6 +202,36 @@ def xmlFromTheater(request):
     if request.method == "POST":
         ListaCines.createXMLFromTheaters()
     return redirect('myAdmin:theaterMenu')
+
+def serverToTheater(request):
+    if request.method == "POST":
+        response = requests.get('http://localhost:5007/getTheaters')
+        theatersAPI = response.json()
+        for theaters in theatersAPI:
+            movie = theaters['cine']
+            name = movie['nombre']
+            rooms = movie["salas"]["sala"]
+
+            room = DoubleLinkedListMovieRoom()
+            
+            for roomOne in rooms:
+                number = roomOne["numero"]
+                seats = roomOne["asientos"]
+                
+                roomObj: MovieRoom = MovieRoom( number, seats )
+                room.push( roomObj )
+
+            theater = Theater( name, room )                
+            if theater is not None:
+                nodeTheater: NodeTheater = NodeTheater( theater )
+                ok = ListaCines.push( nodeTheater )
+                
+                if ok is not True:
+                    return render( request, "myAdmin/theaterMenu.html", {
+                        "error_message": "Ocurrio un problema, vuelve a registrarte con API",
+                    })
+            
+        return redirect('myAdmin:theaterMenu')
 
 def deleteTheater(request, id: int ):
     ListaCines.deleteTheater( id )
@@ -346,6 +372,44 @@ def xmlFromCategory(request):
     if request.method == "POST":
         ListaCategoria.createXMLFromCategories()
     return redirect('myAdmin:categoryMenu')
+
+def serverToCategory(request):
+    if request.method == "POST":
+        response = requests.get('http://localhost:5007/getMovies')
+        categoriesAPI = response.json()
+        for categoryLoop in categoriesAPI:
+            categories = categoryLoop["categoria"]
+
+            for category in categories:
+                name = category["nombre"]
+                movies = category["peliculas"]["pelicula"]
+
+                moviesList: LinkedListMovie = LinkedListMovie()
+
+                for movie in movies:
+                    title = movie["titulo"]
+                    director = movie["director"]
+                    year = movie["anio"]
+                    date = movie["fecha"]
+                    time = movie["hora"]
+                    image = movie["imagen"]
+                    price = movie["precio"]
+
+                    movie: Movie = Movie( title, director, year, date, time, image, price )
+                    nodeMovie: NodeMovie = NodeMovie( movie )
+                    moviesList.push( nodeMovie )
+                    
+                category = Category( name, moviesList )
+                
+                if category is not None:
+                    ok = ListaCategoria.push( category )
+
+                    if ok is not True:
+                        return render( request, "myAdmin/categoryMenu.html", {
+                            "error_message": "Ocurrio un problema, vuelve a registrarte",
+                        })
+                
+        return redirect('myAdmin:categoryMenu')
 
 def deleteCategory(request, id: int ):
     ListaCategoria.delete( id )
@@ -536,7 +600,34 @@ def xmlFromCard(request):
     if request.method == "POST":
         ListaTarjetas.createXMLFromCard()
     return redirect('myAdmin:cardMenu')
-    
+
+def serverToCard(request):
+    if request.method == "POST":
+        response = requests.get('http://localhost:5007/getCards')
+        cardsAPI = response.json()
+        for cardsLoop in cardsAPI:
+            cards = cardsLoop["tarjeta"]
+
+            for card in cards:
+                typeC = card["tipo"]
+                number = card["numero"]
+                owner = card["titular"]
+                expiredTime = card["fecha_expiracion"]
+                
+                creditCard = CreditCard( typeC, number, owner, expiredTime )
+                
+                if creditCard is not None:
+                    ok = ListaTarjetas.push( creditCard )
+
+                    if ok is not True:
+                        return render( request, "myAdmin/creditCardMenu.html", {
+                            "error_message": "Ocurrio un problema, vuelve a registrarte",
+                        })
+
+            
+        return redirect('myAdmin:cardMenu')
+
+
 def deleteCard(request, id: int ):
     nodeCreditCard: NodeCreditCard = ListaTarjetas.findNode( id )
     ListaTarjetas.deleteNode( nodeCreditCard )
@@ -591,8 +682,9 @@ def updateCard(request, id: int):
         "id": id,
         "ListaTarjetas": ListaTarjetas,
     })
-    
-    
+
+# * SHOPS
+     
 def historyShop(request):
     return render(request, "myAdmin/historyMenu.html", {
         "ListaTickets": ListaTickets

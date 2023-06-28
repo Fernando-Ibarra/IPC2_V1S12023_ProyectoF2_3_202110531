@@ -69,6 +69,17 @@
                             </div>
                         </div>
                     </form>
+                    <form method="post" action="{% url 'myAdmin:categoryJSON' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">Cargar categorias por medio de API</p>
+                            </div>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-warning text-white">Importar</button>
+                            </div>
+                        </div>
+                    </form>
                     <form method="post" action="{% url 'myAdmin:xmlCategory' %}">
                         {% csrf_token %}
                         <div class="row">

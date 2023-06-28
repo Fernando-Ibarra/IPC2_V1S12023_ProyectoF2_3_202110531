@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
                                     <div class="col">
                                         <div class="form-floating">
                                             <select class="form-select" aria-label="Default select example" name="category">
-                                                <option selected>Selecciona un cine</option>
+                                                <option selected>Selecciona un categoría</option>
                                                 {% for categoria in ListaCategoria %}
                                                     <option value="{{ forloop.counter }}">{{ categoria.name }}</option>
                                                 {% endfor %}

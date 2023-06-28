@@ -21,6 +21,7 @@ urlpatterns = [
     path('category/delete/<int:id>', views.deleteCategory, name="categoryDelete"),
     path('category/xml/', views.categoryFromXml, name="categoryXml"),
     path('category/xml/export', views.xmlFromCategory, name="xmlCategory"),
+    path('category/serverJSON/', views.serverToCategory, name="categoryJSON"),
     
     # * movie
     path('movie/', views.movieMenu, name="movieMenu"),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('theater/delete/<int:id>', views.deleteTheater, name="theaterDelete"),
     path('theater/xml/', views.theaterFromXml, name="theaterXml"),
     path('theater/xml/export', views.xmlFromTheater, name="xmlTheater"),
+    path('theater/serverJSON/', views.serverToTheater, name="theaterJSON"),
     
     # * room
     path('room/', views.roomMenu, name="roomMenu"),
@@ -50,6 +52,7 @@ urlpatterns = [
     path('card/delete/<int:id>',  views.deleteCard, name="cardDelete"),
     path('card/xml/', views.cardFromXml, name="cardXml"),
     path('card/xml/export', views.xmlFromCard, name="xmlCard"),
+    path('card/serverJSON/', views.serverToCard, name="cardJSON"),
     
     # * MOVIE LIST
     

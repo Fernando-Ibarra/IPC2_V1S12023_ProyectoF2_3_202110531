@@ -70,6 +70,17 @@
                             </div>
                         </div>
                     </form>
+                    <form method="post" action="{% url 'myAdmin:theaterJSON' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">Cargar cines por medio de API</p>
+                            </div>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-info text-white">Importar</button>
+                            </div>
+                        </div>
+                    </form>
                     <form method="post" action="{% url 'myAdmin:xmlTheater' %}">
                         {% csrf_token %}
                         <div class="row">
