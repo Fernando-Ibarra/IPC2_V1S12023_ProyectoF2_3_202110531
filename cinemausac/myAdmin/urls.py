@@ -13,6 +13,7 @@ urlpatterns = [
     path('user/delete/<int:id>',  views.deleteUser, name="userDelete"),
     path('user/xml/', views.userfromXml, name="userXml"),
     path('user/xml/export', views.xmlFromUser, name="xmlUser"),
+    path('user/serverJSON/', views.serverToUser, name="userJSON"),
     
     # * category
     path('category/', views.categoryMenu, name="categoryMenu"),

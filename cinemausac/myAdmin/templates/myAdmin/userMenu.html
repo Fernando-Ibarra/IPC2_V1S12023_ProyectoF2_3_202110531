@@ -109,6 +109,17 @@
                             </div>
                         </div>
                     </form>
+                    <form method="post" action="{% url 'myAdmin:userJSON' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-center">Cargar usuarios por medio de API</p>
+                            </div>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-success text-white">Importar</button>
+                            </div>
+                        </div>
+                    </form>
                     <form method="post" action="{% url 'myAdmin:xmlUser' %}">
                         {% csrf_token %}
                         <div class="row">

@@ -3,6 +3,7 @@ from datastructures import User, Theater,  MovieRoom, Category,  Movie, CreditCa
 from datastructures import NodeUser, NodeTheater, NodeMovieRoom, NodeCategory, NodeMovie, NodeCreditCard
 from datastructures import DoubleLinkedListMovieRoom, LinkedListMovie
 from datastructures import ListaUsuarios, ListaCines, ListaCategoria, ListaPeliculas, ListaTarjetas, ListaTickets
+import requests
 
 # Create your views here.
 def index(request):
@@ -67,6 +68,34 @@ def xmlFromUser(request):
 def deleteUser(request, id: int ):
     ListaUsuarios.deleteUser( id )
     return redirect('myAdmin:userMenu')
+
+def serverToUser(request):
+    if request.method == "POST":
+        response = requests.get('http://localhost:5007/getUsers')
+        usersAPI = response.json()
+        for users in usersAPI:
+            for userOne in users['usuario']:
+                name = userOne['nombre']
+                lastName = userOne['apellido']
+                email = userOne['correo']
+                password = userOne['contrasena']
+                phone = userOne['telefono']
+                rol = userOne['rol']
+                
+                user = User( name, lastName, phone, email, password, rol )
+
+                if user is not None:
+                    nodeuser: NodeUser = NodeUser( user )
+                    ok = ListaUsuarios.push( nodeuser )
+                    
+                    if ok is not True:
+                        return render( request, "myAdmin/userMenu.html", {
+                            "error_message": "Ocurrio un problema, vuelve a registrarte",
+                        })
+            
+    return render(request, 'myAdmin/userMenu.html', {
+        "ListaUsuarios": ListaUsuarios,
+    })
     
 def updateUser(request, id: int):
     if request.method == "POST":
