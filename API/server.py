@@ -54,7 +54,7 @@ def getMovies():
                                                 "anio": "2006",
                                                 "fecha": "2023-06-10",
                                                 "hora": "18:45",
-                                                "imagen": "https://resizing.flixster.com/ZQFb2Ln3STDuhjaIRcUnYxwU82Q=/206x305/v2/https://flxt.tmsimg.com/assets/p162564_p_v8_ag.jpg",
+                                                "imagen": "https://flxt.tmsimg.com/assets/p162564_p_v8_ag.jpg",
                                                 "precio": "50"
                                             },
                                             {
