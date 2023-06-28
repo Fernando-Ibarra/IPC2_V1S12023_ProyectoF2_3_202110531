@@ -396,6 +396,8 @@ def serverToCategory(request):
                     price = movie["precio"]
 
                     movie: Movie = Movie( title, director, year, date, time, image, price )
+                    carousel: Carousel = Carousel( title, image )
+                    ListaPeliculas.push( carousel )
                     nodeMovie: NodeMovie = NodeMovie( movie )
                     moviesList.push( nodeMovie )
                     

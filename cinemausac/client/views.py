@@ -119,7 +119,7 @@ def shopMenu(request):
             })
             
         for seatOne in seatsList:
-            if 0 < int(seatOne) <= roomSeats:
+            if 0 < int(seatOne) <= int(roomSeats):
                 pass
             else:
                 return render( request, "client/shopMenu.html", {
