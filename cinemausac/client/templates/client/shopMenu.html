@@ -31,6 +31,20 @@
         {{ success_message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+        {% if obj_Ticket %}
+            <div class="alert alert-primary alert-dismissible fade show mt-2 rounder-2" role="alert">
+                <p class="fs-2"><strong>Id:</strong> {{ obj_Ticket.id }}</p>
+                <p class="fs-2"><strong>NIT:</strong> {{ obj_Ticket.nit }}</p>
+                <p class="fs-2"><strong>Tipo de Pago:</strong> {{ obj_Ticket.tipodepago }}</p>
+                <p class="fs-2"><strong>Nombre:</strong> {{ obj_Ticket.Nombre }}     <Strong>Dirección</Strong> {{ obj_Ticket.direction }}</p>
+                <p class="fs-2"><strong>Película:</strong> {{ obj_Ticket.pelicula }} </p>
+                <p class="fs-2"><strong>Fecha:</strong> {{ obj_Ticket.fecha }}       <strong>Hora:</strong> {{ obj_Ticket.hora }}</p>
+                <p class="fs-2"><strong>Cantidad:</strong> {{ obj_Ticket.cantidad }}</p>
+                <p class="fs-2"><strong>Sala:</strong> {{ obj_Ticket.sala }}        <strong>Asientos:</strong> {{ obj_Ticket.asientos }}</p>
+                <p class="fs-1"><strong>TOTAL:</strong> {{ obj_Ticket.total }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
     {% endif %}
 
     {% if ListaCategoria %}
