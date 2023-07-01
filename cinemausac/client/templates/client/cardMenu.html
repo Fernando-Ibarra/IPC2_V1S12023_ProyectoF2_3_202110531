@@ -70,5 +70,34 @@
         </form>
     </div>
 
+    <div class="container w-50 mt-5 border rounded-3 shadow">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Tipo</th>
+                    <th scope="col" class="text-center">Número</th>
+                    <th scope="col" class="text-center">Fecha de Expiración</th>
+                </tr>
+            </thead>
+            {% if ListaTarjetas %}
+                {% for tarjeta in ListaTarjetas %}
+                    {% if tarjeta.owner == name %}
+                        <tbody>
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td class="text-center">{{ tarjeta.type }}</td>
+                                <td class="text-center">{{ tarjeta.number }}</td>
+                                <td class="text-center">{{ tarjeta.expiredTime }}</td>
+                            </tr>
+                        </tbody>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p class="text-wrap">No tienen tarjetas registradas</p>
+            {% endif %}
+        </table>
+    </div>
+
 </body>
 </html>

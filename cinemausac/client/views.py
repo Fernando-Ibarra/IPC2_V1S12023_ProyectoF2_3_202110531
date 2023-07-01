@@ -61,11 +61,13 @@ def cardMenu(request):
             
             return redirect('client:index')
             
-    return render(request, 'client/cardMenu.html')
+    return render(request, 'client/cardMenu.html', {
+        "name": owner,
+        "ListaTarjetas": ListaTarjetas
+    })
 
 # * SHOP MENU
 def shopMenu(request):
-    
     name = request.session.get('name')
     lastName = request.session.get('lastName')
     
@@ -171,7 +173,8 @@ def shopMenu(request):
         "ListaTarjetas": ListaTarjetas,
         "success_message": success_message,
         "name": name,
-        "lastName": lastName
+        "lastName": lastName, 
+        "obj_Ticket": obj_Ticket
     })
     
 def showShops(request):
